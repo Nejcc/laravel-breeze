@@ -19,7 +19,7 @@ use function Laravel\Prompts\select;
 
 class InstallCommand extends Command implements PromptsForMissingInput
 {
-    use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks, InstallsLivewireStack;
+    use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks, InstallsLivewireStack, InstallsVueStack;
 
     /**
      * The name and signature of the console command.
@@ -48,6 +48,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
     public function handle()
     {
         if ($this->argument('stack') === 'vue') {
+            return $this->installInertiaVueStack();
+        }elseif ($this->argument('stack') === 'inertia-vue') {
             return $this->installInertiaVueStack();
         } elseif ($this->argument('stack') === 'react') {
             return $this->installInertiaReactStack();
